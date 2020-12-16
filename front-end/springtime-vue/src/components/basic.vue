@@ -51,7 +51,7 @@
   import resultscontainer from '@/components/temp_base/results_container'
   import loader from '@/components/temp_base/loader'
 
-  const baseValues = ['1', '2', '3', '4'];
+  const baseValues = ['1', '2', '3'];
   const maxRadius = Math.max(...baseValues);
   const part = 0.45;
 
@@ -65,8 +65,8 @@
     data: function() {
       return {
         rValues: baseValues,
-        xValues: ['-4', '-3', '-2', '-1', '0'].concat(baseValues),
-        yMinimal: '-5',
+        xValues: ['-5','-4', '-3', '-2', '-1', '0'].concat(baseValues),
+        yMinimal: '-3',
         yMaximum: '5',
         result: { x: '', y: '', r: '', },
         results: [],
@@ -97,14 +97,14 @@
       },
 
       drawRectangle(ctx, x, y, radius) {
-        ctx.fillRect(x - radius, y, radius, radius / 2);
+        ctx.fillRect(x - radius/2, y - radius , radius/2, radius);
       },
 
       drawTriangle(ctx, x, y, radius) {
         ctx.beginPath();
         ctx.moveTo(x, y);
-        ctx.lineTo(x, y - radius);
-        ctx.lineTo(x + radius / 2, y);
+        ctx.lineTo(x, y + radius);
+        ctx.lineTo(x + radius, y);
         ctx.closePath();
         ctx.stroke();
         ctx.fill();
@@ -112,7 +112,7 @@
 
       drawQuadrant(ctx, x, y, radius) {
         ctx.beginPath();
-        ctx.arc(x, y, radius / 2, 0, Math.PI / 2, false);
+        ctx.arc(x, y, radius, -Math.PI / 2, 0, false);
         ctx.lineTo(x, y);
         ctx.closePath();
         ctx.stroke();
@@ -248,7 +248,7 @@
         this.drawSignedVerticalNotch(ctx, width / 2 + radius / 2, height / 2, radius / 20, 'R/2');
         this.drawSignedVerticalNotch(ctx, width / 2 + radius, height / 2, radius / 20, 'R');
 
-        console.log('template drew');
+        console.log('template has drown');
 
       },
 
@@ -296,8 +296,9 @@
           this.drawSignedVerticalNotch(ctx, start + (maxRadius + i) * step, height / 2, radius / 20, i + '');
         }
 
-        console.log('basic drew');
+        console.log('basic has drown');
       },
+
       redraw: function(radius) {
         if (!radius || radius <= 0)
           this.tempdraw('R');
