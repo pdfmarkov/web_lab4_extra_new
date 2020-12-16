@@ -101,7 +101,7 @@
     text-align: left;
   }
 
-  @media only all and (min-width: 1245px) {
+  @media only all and (min-width: 1256px) {
     .special-width {
       width: 480px;
       margin: 0;
@@ -118,7 +118,7 @@
     }
   }
 
-  @media only all and (min-width: 643px) and (max-width: 1244px) {
+  @media only all and (min-width: 882px) and (max-width: 1255px) {
     .special-width {
       width: 360px;
       margin: 0;
@@ -133,7 +133,7 @@
     }
   }
 
-  @media only all and (max-width: 642px) {
+  @media only all and (max-width: 881px) {
     .special-width {
       width: 60px;
       margin: 0;

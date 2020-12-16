@@ -13,17 +13,17 @@
 
         <div id="form-container">
           <form id="result">
-            <fieldset ref="x" title="Значение параметра x должно быть целым числом в пределах -4 до 4">
+            <fieldset ref="x" title="Значение параметра x должно быть целым числом в пределах -5 до 3">
               <label>x</label>
               <select v-model="result.x" required="true">
                 <option v-for="value in xValues" >{{ value }}</option>
               </select>
             </fieldset>
-            <fieldset ref="y" title="Значение параметра y должно быть действительным число в интервале от -5 до 5">
+            <fieldset ref="y" title="Значение параметра y должно быть целым число в интервале от -3 до 5">
               <label>y</label>
-              <input type="text" placeholder="y in (-5, 5)" v-model="result.y" required="true" />
+              <input type="text" placeholder="y in (-3, 5)" v-model="result.y" required="true" />
             </fieldset>
-            <fieldset ref="r" title="Значение параметра r должно быть целым числом в пределах от 1 до 4">
+            <fieldset ref="r" title="Значение параметра r должно быть целым числом в пределах от 1 до 3">
               <label>r</label>
               <select v-model="result.r" required="true">
                 <option v-for="value in xValues">{{ value }}</option>
@@ -40,19 +40,15 @@
     <loader v-if="isLoading" /><resultscontainer v-bind:results="results" v-else-if="results.length" />
     <p class="empty-results" v-else>результаты отсутствуют</p>
 
-<!--    <div id="close-container" class="inlines__align&#45;&#45;center">-->
-<!--      <button @click="signout" class="btn">закрыть сессию</button>-->
-<!--    </div>-->
-
   </div>
 </template>
 
 <script>
-  import resultscontainer from '@/components/temp_base/results_container'
-  import loader from '@/components/temp_base/loader'
+import resultscontainer from '@/components/temp_base/results_container'
+import loader from '@/components/temp_base/loader'
 
-  const baseValues = ['1', '2', '3'];
-  const maxRadius = Math.max(...baseValues);
+const baseValues = ['1', '2', '3'];
+  const maxRadius = 4;
   const part = 0.45;
 
   export default {
@@ -270,7 +266,7 @@
         ctx.clearRect(0, 0, width, height);
 
         console.log('drawing working area');
-        this.drawArea(canvas, ctx, width / 2, height / 2, title * radius / maxRadius);
+        this.drawArea(canvas, ctx, width / 2, height / 2, title * radius / 4);
 
         console.log('drawing coordinate lines');
         this.drawLines(ctx, width / 2, height / 2, width);
@@ -284,16 +280,15 @@
         for (let i = -4; i <= 4; i += 0.5) {
           let start = height / 2 + radius;
           let step = 2 * radius / 8;
-          if (i === 0)
-            continue;
-          this.drawSignedHorizontalNotch(ctx, width / 2, start - (maxRadius + i) * step, radius / 20, i + '');
+          if (i === 0) continue;
+          this.drawSignedHorizontalNotch(ctx, width / 2, start - (4 + i) * step, radius / 20, i + '');
         }
 
         console.log('drawing vertical notches');
         for (let i = -4; i <= 4; i += 0.5) {
           let start = width / 2 - radius;
           let step = 2 * radius / 8;
-          this.drawSignedVerticalNotch(ctx, start + (maxRadius + i) * step, height / 2, radius / 20, i + '');
+          this.drawSignedVerticalNotch(ctx, start + (4 + i) * step, height / 2, radius / 20, i + '');
         }
 
         console.log('basic has drown');
@@ -388,6 +383,7 @@
               if (isHit !== undefined && isHit !== null) {
                 console.log('query evaluation finished');
                 this.results = this.results.concat([{ x: this.result.x, y: this.result.y, r: this.result.r, hit: isHit }]);
+                this.drawDots(this.results);
               } else throw new Error('bad repond object [field "hit" not provided]');
             } else {
               let err = new Error('bad respond object [provided empty result]');
@@ -399,18 +395,14 @@
           } finally {
             console.log('fetching new result finished');
           }
-        } else if (response.status == '403') {
-
+        } else if (response.status === 403) {
           console.error('access token expired');
           console.log('fetching new token pair...');
           await this.fetchToken(this.fetchResult);
-          // console.log('redirecting to login page...');
-          // this.signout();
+
 
         } else {
           console.error(`bad response ${response.statusText} : ${response.status}`);
-          // plug for testing basic drawing
-          // this.results = this.results.concat([{ x: this.result.x, y: this.result.y, r: this.result.r, hit: true }]);
         }
         console.log(`response status: ${response.status}`);
       },
@@ -422,7 +414,6 @@
         if (!results.length)
           console.log('no any results in the table');
         else {
-          // this.result.r = results[0].r;
           const out = 5;
           let canvas = this.$refs.area;
           let ctx = canvas.getContext('2d');
@@ -432,7 +423,7 @@
           for (let i = results.length - 1; i >= 0; --i) {
             console.log(`putting dot: ${results[i]}`);
             console.log(`x: ${ results[i].x }; y: ${ results[i].y }`);
-            ctx.fillStyle = results[i].hit? "#000000" : "#cd0000";
+            ctx.fillStyle = results[i].hit? "#46de46" : "#cd0000";
 
             ctx.globalAlpha = 1 - 1 / counter;
             console.log(`counter: ${ counter }; alpha set to: ${ ctx.globalAlpha }`);
@@ -472,7 +463,7 @@
         }
 
         console.log(`dot.x: ${ result.x }; dot.y: ${ result.y }`);
-        ctx.fillStyle = result.hit? "#000000" : "#cd0000";
+        ctx.fillStyle = result.hit? "#46de46" : "#cd0000";
 
         console.log('translating dot coordinates');
         const realX = this.translateFrom(result.x, width, maxRadius, part);
@@ -549,9 +540,6 @@
 
           console.log('fetching new result');
           await this.fetchResult();
-          // let last = this.results[this.results.length - 1];
-          // console.log(`get last element ${ last }`);
-          // this.drawDot(last);
           this.drawDots(this.results);
         }
       },
@@ -584,19 +572,17 @@
           console.log('access token expired...');
           await this.fetchToken(this.retrieve);
         } else {
-          // plug for testing table
-          // this.results = [ {x: 1, y: '4.9999999999999999999999999999999', r: 2, hit: true }];
           console.error(`bad response ${response.status} ${response.statusText}`);
         }
         this.isLoading = false;
       },
       createExitButton: function() {
-        let exitButton = document.createElement("BUTTON");
-        exitButton.innerHTML = 'Выйти';
-        exitButton.setAttribute('class', 'btn logo_btn');
-        exitButton.onclick = this.signout;
+        let exit = document.createElement("a");
+        exit.innerHTML = 'Выйти';
+        exit.setAttribute('class', 'btn logo_btn');
+        exit.onclick = this.signout;
         let logo = document.getElementById('logo_btn');
-        logo.appendChild(exitButton);
+        logo.appendChild(exit);
       },
     },
     mounted() {
@@ -607,6 +593,7 @@
     watch: {
       radius: function(value) {
         this.redraw(this.radius);
+        if (this.radius > 0) this.drawDots(this.results);
       },
     }
   }
@@ -615,6 +602,8 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap%27');
+  @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
 
   #basic {
     width: 100%;
@@ -643,6 +632,11 @@
     box-shadow: 0 0 10px rgba(0,0,0,.3);
     width: 30%;
     margin: 10% 2%;
+  }
+
+  .btn{
+    font-family: "Jost", sans-serif;
+    margin-right: 30px;
   }
 
   .btn:hover {
@@ -715,7 +709,7 @@
     border: 0px solid #c6c9cc;
   }
 
-  @media only all and (min-width: 1245px) {
+  @media only all and (min-width: 1256px) {
 
     .top-shell {
       width: 35%;
@@ -749,7 +743,7 @@
     }
   }
 
-  @media only all and (min-width: 643px) and (max-width: 1244px) {
+  @media only all and (min-width: 882px) and (max-width: 1255px) {
 
     .text__title {
       font-size: 18px;
@@ -792,7 +786,7 @@
     }
   }
 
-  @media only all and (max-width: 642px) {
+  @media only all and (max-width: 881px) {
 
     .btn {
       font-size: 100%;

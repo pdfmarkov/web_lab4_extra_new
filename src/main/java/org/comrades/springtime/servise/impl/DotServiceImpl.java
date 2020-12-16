@@ -29,14 +29,15 @@ public class DotServiceImpl implements DotService {
         Double y = dot.getY();
         Double r = dot.getR().doubleValue();
 
-        if (x >= 0 && y >= 0 && (-2*x + r >= y)) {
+        if (x >= 0 && y >= 0 && (Math.pow(x, 2) + Math.pow(y, 2)) <= Math.pow(r, 2)) {
             dot.setHit(true);
             return true;
         }
-        else if (x <= 0 && y <= 0 && x >= -r && y >= -r/2) {
+        else if (x <= 0 && y >= 0 && x >= -r/2 && y <= r) {
             dot.setHit(true);
             return true;
-        }else if (x >= 0 && y <= 0 && (Math.pow(x, 2) + Math.pow(y, 2)) <= Math.pow(r/2, 2)) {
+        }
+        else if (x >= 0 && y <= 0 && (y >= x - r)) {
             dot.setHit(true);
             return true;
         }else {

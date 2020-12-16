@@ -3,12 +3,12 @@
       <div id="login-form">
       <fieldset>
         <label>логин</label>
-        <input type="text" placeholder="dissya" title="имя пользователя" v-model="user.login" required="true" autocomplete="username">
+        <input type="text" placeholder="login" title="имя пользователя" v-model="user.login" required="true" autocomplete="username">
       </fieldset>
 
       <fieldset>
         <label>пароль</label>
-        <input type="password" placeholder="qwerty1234" title="пароль" v-model="user.password" required="true" autocomplete="current-password">
+        <input type="password" placeholder="password (min 10 symbols)" title="пароль" v-model="user.password" required="true" autocomplete="current-password">
       </fieldset>
           <a id="err_message" ></a>
       <fieldset class="separated">
@@ -38,6 +38,7 @@
     },
     computed: {
       isNotFilled: function() {
+
         return !(this.user.login !== undefined && this.user.login !== null && this.user.password !== undefined && this.user.password !== null && this.user.login.length > 0 && this.user.password.length >= this.minPasswordLength); 
       },
     },
@@ -217,7 +218,7 @@
     text-align: center;
   }
 
-  @media only all and (min-width: 643px) and (max-width: 1244px) {
+  @media only all and (min-width: 882px) and (max-width: 1255px) {
       #login-form {
           display: block;
           height: 100%;
@@ -234,7 +235,7 @@
       }
   }
 
-  @media only all and (max-width: 642px) {
+  @media only all and (max-width: 881px) {
     #loging {
       display: block;
       width: 90%;

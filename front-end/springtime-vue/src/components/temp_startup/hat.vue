@@ -20,21 +20,21 @@
 			return {
 				authors: [
 					{ 
-						name: 'Ленар', 
-						surname: 'Ханнанов',
-						group: 'P3214',
-						variant: '2599',
-						imageURL: 'https://avatars0.githubusercontent.com/u/55162739?s=400&u=3c4b18db132cb3f15d9ce43fd39b40ffcc72949c&v=4',
-						profileLink: 'https://github.com/Come1LLF00',
+						name: 'Петр',
+						surname: 'Марков',
+						group: 'P3210',
+						variant: '10113',
+						imageURL: 'https://avatars0.githubusercontent.com/u/12988105?s=460&u=a7e09f04ee917e60702fb3e6bab0baf381032863&v=4',
+						profileLink: 'https://github.com/pdfmarkov',
 					},
 
 					{ 
-						name: 'Антон', 
-						surname: 'Сушкевич',
-						group: 'P3214',
-						variant: '2599',
-						imageURL: 'https://avatars3.githubusercontent.com/u/58341402?s=400&u=16c83f565161eab46f41869a47fa1e71565ac53d&v=4',
-						profileLink: 'https://github.com/Leargy',
+						name: 'Влад',
+						surname: 'Тарасенко',
+						group: 'P3210',
+						variant: '10113',
+						imageURL: 'https://avatars3.githubusercontent.com/u/58933887?s=460&u=7b6e989c1545420a06b4dc55ff1265c873f9ce18&v=4',
+						profileLink: 'https://github.com/VladislavByITMO',
 					},
 				]
 			};

@@ -69,10 +69,10 @@
   }
 
 
-  @media only all and (min-width: 1245px) {
+  @media only all and (min-width: 1256px) {
   }
 
-  @media only all and (min-width: 643px) and (max-width: 1244px) {
+  @media only all and (min-width: 882px) and (max-width: 1255px) {
     #author {
       text-decoration: none;
     }
@@ -88,7 +88,7 @@
     }
   }
 
-  @media only all and (max-width: 642px) {
+  @media only all and (max-width: 881px) {
 
     #author {
       width: 90%;

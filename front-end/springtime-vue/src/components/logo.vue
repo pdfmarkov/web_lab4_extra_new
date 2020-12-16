@@ -1,7 +1,7 @@
 <template>
 	<header id="logo">
         <div id="logo_box">
-            <h3>dots among the area</h3>
+            <h3>Lab 4, Var 10113</h3>
         </div>
         <div id="logo_btn_panel">
             <div id="logo_btn"></div>
@@ -12,6 +12,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 
   #logo {
     box-shadow: 0 0 20px rgba(0,0,0,.5);
@@ -23,9 +24,11 @@
   #logo_box {
       width: 80%;
       margin: 0;
-      font-style: italic;
+      /*font-style: italic;*/
       color: #2a2a2a;
-      font-family: Satisfy, Lato, "Open Sans", Roboto, sans-serif;
+      /*font-family: Satisfy, Lato, "Open Sans", Roboto, sans-serif;*/
+      font-family: "Jost", serif;
+
   }
 
   #logo_btn_panel {
@@ -52,7 +55,7 @@
     text-decoration: underline;
   }
 
-  @media only all and (min-width: 1245px) {
+  @media only all and (min-width: 1256px) {
 
     #logo h3{
         font-size: 300%;
@@ -60,14 +63,14 @@
 
   }
 
-  @media only all and (min-width: 643px) and (max-width: 1244px) {
+  @media only all and (min-width: 882px) and (max-width: 1255px) {
 
       #logo h3{
           font-size: 300%;
       }
   }
 
-  @media only all and (max-width: 642px) {
+  @media only all and (max-width: 881px) {
 
       #logo h3{
           font-size: 200%;

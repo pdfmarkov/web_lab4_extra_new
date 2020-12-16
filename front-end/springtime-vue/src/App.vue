@@ -9,12 +9,13 @@
 </template>
 
 <script>
-  import saveState from 'vue-save-state'
-  import logo from '@/components/logo'
-  import startup from '@/components/startup'
-  import basic from '@/components/basic'
-  import hat from '@/components/temp_startup/hat'
-  import basement from '@/components/basement'
+import logo from '@/components/logo'
+import startup from '@/components/startup'
+import basic from '@/components/basic'
+import hat from '@/components/temp_startup/hat'
+import basement from '@/components/basement'
+
+document.title = 'Lab.4, Markov/Tarasenko';
 
   export default {
     name: 'app',
@@ -92,7 +93,7 @@ body {
 }
 
 
-  @media only all and (min-width: 1245px) {
+  @media only all and (min-width: 1256px) {
     #wrap {
       width: 1245px;
       font-size: 16px;
@@ -100,14 +101,14 @@ body {
 
   }
 
-  @media only all and (min-width: 643px) and (max-width: 1244px) {
+  @media only all and (min-width: 882px) and (max-width: 1255px) {
     #wrap {
       width: 643px;
       font-size: 12px;
     }
   }
 
-  @media only all and (max-width: 642px) {
+  @media only all and (max-width: 881px) {
     #wrap {
       width: 320px;
       font-size: 8px;
