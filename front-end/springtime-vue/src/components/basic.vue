@@ -333,6 +333,8 @@ const baseValues = ['1', '2', '3'];
             'Content-Type': 'application/json;charset=utf-8'
           },
           body: JSON.stringify({ refreshToken : this.$session.get(this.refresh)}),
+        }).catch(function (){
+          alert("Error while getting token. Check your connection")
         });
 
         console.log('check if response is ok');
@@ -370,6 +372,8 @@ const baseValues = ['1', '2', '3'];
             'shell_token': this.$session.get(this.access),
           },
           body: JSON.stringify(this.result)
+        }).catch(function (){
+          alert("Error while getting response. Check your connection")
         });
 
         console.log('request sent -- checking if response is ok (201)');
@@ -392,11 +396,13 @@ const baseValues = ['1', '2', '3'];
           } catch (e) {
             console.error(e);
             console.error(`bad respond object: ${e.data}`);
+            alert(`bad respond object: ${e.data}`);
           } finally {
             console.log('fetching new result finished');
           }
         } else if (response.status === 403) {
           console.error('access token expired');
+          alert('access token expired');
           console.log('fetching new token pair...');
           await this.fetchToken(this.fetchResult);
 

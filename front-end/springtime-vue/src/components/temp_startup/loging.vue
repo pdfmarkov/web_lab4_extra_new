@@ -60,6 +60,8 @@
             'Content-Type': 'application/json;charset=utf-8',
           },
           body: JSON.stringify(this.user)
+        }).catch(function (){
+          alert("Error while authentication. Check your connection")
         });
 
         let json = null;
@@ -107,6 +109,8 @@
             'Content-Type': 'application/json;charset=utf-8',
           },
           body: JSON.stringify(this.user)
+        }).catch(function (){
+          alert("Error while getting token. Check your connection")
         });
 
         console.log('sent request');
