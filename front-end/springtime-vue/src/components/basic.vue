@@ -21,7 +21,7 @@
             </fieldset>
             <fieldset ref="y" title="Значение параметра y должно быть целым число в интервале от -3 до 5">
               <label>y</label>
-              <input type="text" placeholder="y in (-3, 5)" v-model="result.y" required="true" />
+              <input type="text" placeholder="y in (-3, 5)" :maxlength="9" v-model="result.y" required="true" />
             </fieldset>
             <fieldset ref="r" title="Значение параметра r должно быть целым числом в пределах от 1 до 3">
               <label>r</label>
@@ -47,6 +47,8 @@
 import resultscontainer from '@/components/temp_base/results_container'
 import loader from '@/components/temp_base/loader'
 
+const baseURL = 'http://localhost:41143/';
+
 const baseValues = ['1', '2', '3'];
   const maxRadius = 4;
   const part = 0.45;
@@ -68,9 +70,9 @@ const baseValues = ['1', '2', '3'];
         results: [],
         isLoading: true,
         queries: {
-          add: '/main/app/add',
-          refresh: '/api/refresh/token',
-          retrieve: '/main/app/dots/all',
+          add: 'main/app/add',
+          refresh: 'api/refresh/token',
+          retrieve: 'main/app/dots/all',
         },
         counter: 4,
       };
@@ -312,9 +314,9 @@ const baseValues = ['1', '2', '3'];
         const isFloat = floatRegex.test(value);
         console.log(`float?: ${isFloat}`);
         console.log(`not NaN?: ${!isNaN(float)}`);
-        const isLess = (float <= this.yMaximum - Number.EPSILON);
+        const isLess = (float <= this.yMaximum);
         console.log(`less?: ${isLess}`);
-        const isMore = (float >= this.yMinimal + Number.EPSILON);
+        const isMore = (float >= this.yMinimal);
         console.log(`more?: ${isMore}`);
         return isFloat && !isNaN(float) && isLess && isMore;
       },
@@ -327,7 +329,7 @@ const baseValues = ['1', '2', '3'];
       fetchToken: async function(repeat, ...args) {
 
         console.log('fetching tokens from server...');
-        let response = await fetch(this.queries.refresh, {
+        let response = await fetch(baseURL + this.queries.refresh, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -365,7 +367,7 @@ const baseValues = ['1', '2', '3'];
         console.log(`new result is ready to send: ${this.result}`);
 
         console.log('sending data...');
-        let response = await fetch(this.queries.add, {
+        let response = await fetch(baseURL + this.queries.add, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -524,14 +526,14 @@ const baseValues = ['1', '2', '3'];
           console.log('valid radius value');
           let area = this.$refs.area;
           const rect = area.getBoundingClientRect();
-          console.log(`canvas: (${area.width}:${area.height})`);
+          console.log(`canvas: (${area.clientWidth}:${area.clientHeight})`);
 
           console.log('getting x coordinate');
           const realX = event.clientX - rect.left;
           console.log(`mouse x: ${ realX }`);
 
           console.log('translating to x value');
-          const x = this.translateTo(realX, area.width, maxRadius, part);
+          const x = this.translateTo(realX, area.clientWidth, maxRadius, part);
           console.log(`x translated to: ${ x }`);
           this.result.x = x;
 
@@ -540,7 +542,7 @@ const baseValues = ['1', '2', '3'];
           console.log(`mouse y: ${ realY }`);
 
           console.log('translating to y value');
-          const y = -this.translateTo(realY, area.height, maxRadius, part);
+          const y = -this.translateTo(realY, area.clientHeight, maxRadius, part);
           console.log(`y translated to: ${ y }`);
           this.result.y = y;
 
@@ -557,9 +559,10 @@ const baseValues = ['1', '2', '3'];
       },
 
       retrieve: async function() {
+
         console.log('getting results with unique token...');
 
-        let response = await fetch(this.queries.retrieve, {
+        let response = await fetch(baseURL + this.queries.retrieve, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',

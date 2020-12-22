@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  const baseURL = 'http://localhost:41143/';
   export default {
     name: 'loging',
     props: ['access', 'refresh'],
@@ -54,7 +55,7 @@
         console.log(`user: ${this.user}`);
 
         console.log('fetching tokens from server...');
-        let response = await fetch(this.queries.signin, {
+        let response = await fetch(baseURL+this.queries.signin, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -85,6 +86,7 @@
 
             this.$session.set(this.access, json.accessToken);
             this.$session.set(this.refresh, json.refreshToken);
+            //console.log(this.$session.get(this.access)+"   "+this.$session.get(this.refresh))
 
             window.location.reload();
           }
@@ -103,7 +105,7 @@
         console.log(`user: ${this.user}`);
         
         console.log('fetching tokens from server...');
-        let response = await fetch(this.queries.register, {
+        let response = await fetch(baseURL+this.queries.register, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',

@@ -15,6 +15,8 @@ import basic from '@/components/basic'
 import hat from '@/components/temp_startup/hat'
 import basement from '@/components/basement'
 
+
+
 document.title = 'Lab.4, Markov/Tarasenko';
 
   export default {

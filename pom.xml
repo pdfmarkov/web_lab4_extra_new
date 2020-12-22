@@ -11,7 +11,7 @@
     <groupId>org.comrades</groupId>
     <artifactId>springtime</artifactId>
     <version>0.0.1_e</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>springtime</name>
     <description>The fourth problem in web-programming discipline. It have the same idea as 3rd problem but must use
         some modern technologies like Spring, Vue.js, React, Redux, Angular, EJB and so on.
@@ -102,7 +102,30 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.heroku.sdk</groupId>-->
+<!--                <artifactId>heroku-maven-plugin</artifactId>-->
+<!--                <version>3.0.3</version>-->
+<!--                <configuration>-->
+<!--&lt;!&ndash;                    <id>copy-dependencies</id>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <phase>package</phase>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <goals><goal>copy-dependencies</goal></goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <processTypes>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* org.comrades.springtime.SpringtimeApplication</web>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </processTypes>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <jdkVersion>1.8</jdkVersion>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <warFile>target/springtime-0.0.1_e.war</warFile>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>
