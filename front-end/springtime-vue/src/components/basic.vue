@@ -15,19 +15,25 @@
           <form id="result">
             <fieldset ref="x" title="Значение параметра x должно быть целым числом в пределах -5 до 3">
               <label>x</label>
-              <select v-model="result.x" required="true">
-                <option v-for="value in xValues" >{{ value }}</option>
-              </select>
+              <label>
+                <select v-model="result.x" required="true">
+                  <option v-for="value in xValues" >{{ value }}</option>
+                </select>
+              </label>
             </fieldset>
             <fieldset ref="y" title="Значение параметра y должно быть целым число в интервале от -3 до 5">
               <label>y</label>
-              <input type="text" placeholder="y in (-3, 5)" :maxlength="9" v-model="result.y" required="true" />
+              <label>
+                <input type="text" placeholder="y in (-3, 5)" :maxlength="9" v-model="result.y" required="true" />
+              </label>
             </fieldset>
             <fieldset ref="r" title="Значение параметра r должно быть целым числом в пределах от 1 до 3">
               <label>r</label>
-              <select v-model="result.r" required="true">
-                <option v-for="value in xValues">{{ value }}</option>
-              </select>
+              <label>
+                <select v-model="result.r" required="true">
+                  <option v-for="value in xValues">{{ value }}</option>
+                </select>
+              </label>
             </fieldset>
             <fieldset class="inlines__align--center">
               <button @click.prevent="check" class="btn">проверить</button>
@@ -555,7 +561,10 @@ const baseValues = ['1', '2', '3'];
       signout: function(event) {
         console.log('close current session...');
         this.$session.clear();
-        window.location.reload();
+        document.getElementById('logo_btn').innerHTML="";
+        //window.location.reload();
+        this.$router.push({name: 'auth-page'});
+
       },
 
       retrieve: async function() {
@@ -577,7 +586,7 @@ const baseValues = ['1', '2', '3'];
           console.log('getting the json object...');
           let json = await response.json();
           this.results = json;
-        } else if (response.status == '403') {
+        } else if (response.status === '403') {
           console.log('access token expired...');
           await this.fetchToken(this.retrieve);
         } else {
@@ -643,12 +652,12 @@ const baseValues = ['1', '2', '3'];
     margin: 10% 2%;
   }
 
-  .btn{
+  #logo_btn{
     font-family: "Jost", sans-serif;
     margin-right: 30px;
   }
 
-  .btn:hover {
+  #logo_btn:hover {
     background-color: #5e808f;
   }
 

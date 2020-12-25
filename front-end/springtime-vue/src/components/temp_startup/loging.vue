@@ -88,7 +88,8 @@
             this.$session.set(this.refresh, json.refreshToken);
             //console.log(this.$session.get(this.access)+"   "+this.$session.get(this.refresh))
 
-            window.location.reload();
+            //window.location.reload();
+            this.$router.push({name: 'app-page'});
           }
         } else this.createMessage(`*${json.description}`);
       },
@@ -138,7 +139,8 @@
             this.$session.set(this.access, json.accessToken);
             this.$session.set(this.refresh, json.refreshToken);
 
-            window.location.reload();
+            //window.location.reload();
+            this.$router.push({name: 'app-page'});
           }
         } else {
             this.createMessage(`*${json.description}`);
@@ -208,7 +210,6 @@
     padding: 2% 5%;
     background-color: #3e606f;
     color: #eaeaea;
-    font-family: 'Pacifico', cursive;
     font-size: 18px;
   }
 

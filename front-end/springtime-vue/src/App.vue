@@ -1,21 +1,15 @@
 <template>
   <div id="app">
     <logo />
-    <basic :access="accessTokenName" :refresh="refreshTokenName" v-if="isAuthorized" />
-    <startup :access="accessTokenName" :refresh="refreshTokenName" v-else />
-    <hat v-if="!isAuthorized"/>
+    <router-view/>
     <basement/>
   </div>
 </template>
 
 <script>
+
 import logo from '@/components/logo'
-import startup from '@/components/startup'
-import basic from '@/components/basic'
-import hat from '@/components/temp_startup/hat'
 import basement from '@/components/basement'
-
-
 
 document.title = 'Lab.4, Markov/Tarasenko';
 
@@ -23,27 +17,7 @@ document.title = 'Lab.4, Markov/Tarasenko';
     name: 'app',
     components: {
       logo,
-      startup,
-      basic,
-      hat,
-      basement,
-    },
-    data: function() {
-      return {
-        accessTokenName: 'accessToken',
-        refreshTokenName: 'refreshToken',
-      };
-    },
-    computed: {
-      access: function() {
-        return this.$session.get(this.accessTokenName);
-      },
-      refresh: function() {
-        return this.$session.get(this.refreshTokenName);
-      },
-      isAuthorized: function() {
-        return !((this.access === undefined) || (this.access === null) || (this.access === ''));
-      },
+      basement
     },
   }
 </script>

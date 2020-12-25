@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin(origins = "https://pdfmarkov.github.io")
 @RestController
 @RequestMapping("/main/app/**")
 public class MainController {

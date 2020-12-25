@@ -21,6 +21,7 @@ import javax.persistence.NonUniqueResultException;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin(origins = "https://pdfmarkov.github.io")
 @RestController
 @RequestMapping("/api/aunt/**")
 public class AuthorizationController {
